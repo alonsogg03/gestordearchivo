@@ -12,7 +12,7 @@ if (isset($_POST['save'])) {
     $file_type = $_FILES['file']['type'];
     $file_temp = $_FILES['file']['tmp_name'];
     $location = "files/" . $cod_id . "/" . $file_name;
-    $date = date("Y-m-d H:i:s", strtotime("+8 hours"));
+    $date = date("Y-m-d H:i:s", strtotime("+17 hours"));
 
     // Crear directorio si no existe
     if (!file_exists("files/" . $cod_id)) {
