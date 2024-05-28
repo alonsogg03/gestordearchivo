@@ -48,7 +48,7 @@
 		<table id = "table" class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Cuenta Estudiantil</th>
+					<th>Nª Cuenta</th>
 					<th>Nombre</th>
 					<th>Apellidos</th>
 					<th>Género</th>
@@ -62,17 +62,17 @@
 					$query = mysqli_query($conn, "SELECT * FROM `student`") or die(mysqli_error());
 					while($fetch = mysqli_fetch_array($query)){
 				?>
-					<tr class="del_student<?php echo $fetch['stud_id']?>">
-						<td><?php echo $fetch['stud_no']?></td>
+					<tr class="del_student<?php echo $fetch['Id']?>">
+						<td><?php echo $fetch['cod_id']?></td>
 						<td><?php echo $fetch['firstname']?></td>
 						<td><?php echo $fetch['lastname']?></td>
 						<td><?php echo $fetch['gender']?></td>
 						<td><?php echo $fetch['unidad']?></td>
 						<td>********</td>
-						<td><center><button class="btn btn-warning" data-toggle="modal" data-target="#edit_modal<?php echo $fetch['stud_id']?>"><span class="glyphicon glyphicon-edit"></span> Editar</button> 
-						<button class="btn btn-danger btn-delete" id="<?php echo $fetch['stud_id']?>" type="button"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></center></td>
+						<td><center><button class="btn btn-warning" data-toggle="modal" data-target="#edit_modal<?php echo $fetch['Id']?>"><span class="glyphicon glyphicon-edit"></span> Editar</button> 
+						<button class="btn btn-danger btn-delete" id="<?php echo $fetch['Id']?>" type="button"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></center></td>
 					</tr>
-	<div class="modal fade" id="edit_modal<?php echo $fetch['stud_id']?>" aria-hidden="true">
+	<div class="modal fade" id="edit_modal<?php echo $fetch['Id']?>" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<form method="POST" action="update_student.php">	
@@ -84,8 +84,8 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cuenta</label>
-								<input type="hidden" name="stud_id" value="<?php echo $fetch['stud_id']?>" class="form-control"/>
-								<input type="number" name="stud_no" value="<?php echo $fetch['stud_no']?>" class="form-control" required="required"/>
+								<input type="hidden" name="Id" value="<?php echo $fetch['Id']?>" class="form-control"/>
+								<input type="number" name="cod_id" value="<?php echo $fetch['cod_id']?>" class="form-control" required="required"/>
 							</div>
 							<div class="form-group">
 								<label>Nombre</label>
@@ -167,7 +167,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cuenta</label>
-								<input type="number" name="stud_no" class="form-control" required="required"/>
+								<input type="number" name="cod_id" class="form-control" required="required"/>
 							</div>
 							<div class="form-group">
 								<label>Nombre</label>
@@ -222,9 +222,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.btn-delete').on('click', function(){
-		var stud_id = $(this).attr('id');
+		var Id = $(this).attr('id');
 		$("#modal_confirm").modal('show');
-		$('#btn_yes').attr('name', stud_id);
+		$('#btn_yes').attr('name', Id);
 	});
 	$('#btn_yes').on('click', function(){
 		var id = $(this).attr('name');
@@ -232,7 +232,7 @@ $(document).ready(function(){
 			type: "POST",
 			url: "delete_student.php",
 			data:{
-				stud_id: id
+				Id: id
 			},
 			success: function(){
 				$("#modal_confirm").modal('hide');

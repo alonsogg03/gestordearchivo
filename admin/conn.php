@@ -1,5 +1,5 @@
 <?php
-	$conn = mysqli_connect("localhost", "root", "1234", "bd_archivos");
+	$conn = mysqli_connect("localhost", "root", "", "bd_archivos");
 	
 	if(!$conn){
 		die("Error: Failed to connect to database!");

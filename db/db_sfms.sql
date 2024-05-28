@@ -32,14 +32,14 @@ CREATE TABLE `storage` (
   `filename` varchar(100) NOT NULL,
   `file_type` varchar(20) NOT NULL,
   `date_uploaded` varchar(100) NOT NULL,
-  `stud_no` int(10) NOT NULL
+  `cod_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `storage`
 --
 
-INSERT INTO `storage` (`store_id`, `filename`, `file_type`, `date_uploaded`, `stud_no`) VALUES
+INSERT INTO `storage` (`store_id`, `filename`, `file_type`, `date_uploaded`, `cod_id`) VALUES
 (3, 'WWW.YTS.AG.jpg', 'image/jpeg', '2019-01-30, 12:27 AM', 14523),
 (4, 'WWW.YTS.AG.jpg', 'image/jpeg', '2019-01-30, 12:34 AM', 14531);
 
@@ -50,8 +50,8 @@ INSERT INTO `storage` (`store_id`, `filename`, `file_type`, `date_uploaded`, `st
 --
 
 CREATE TABLE `student` (
-  `stud_id` int(11) NOT NULL,
-  `stud_no` int(10) NOT NULL,
+  `Id` int(11) NOT NULL,
+  `cod_id` int(10) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `gender` varchar(10) NOT NULL,
@@ -95,7 +95,7 @@ ALTER TABLE `storage`
 -- Indices de la tabla `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`stud_id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indices de la tabla `user`
@@ -117,7 +117,7 @@ ALTER TABLE `storage`
 -- AUTO_INCREMENT de la tabla `student`
 --
 ALTER TABLE `student`
-  MODIFY `stud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `user`

@@ -13,6 +13,7 @@
 		<link rel = "stylesheet" type = "text/css" href = "admin/css/style.css" />
 	</head>
 <body>
+
 	<nav class="navbar navbar-default navbar-fixed-top" style="background-color:blue;">
 		<div class="container-fluid">
 			<label class="navbar-brand" id="title">Sistema Gestor de Archivos Básico</label>
@@ -20,22 +21,22 @@
 	</nav>
 	<div class="col-md-4">
 		<?php
-			$query = mysqli_query($conn, "SELECT * FROM `student` WHERE `stud_id` = '$_SESSION[student]'") or die(mysqli_error());
+			$query = mysqli_query($conn, "SELECT * FROM `student` WHERE `Id` = '$_SESSION[student]'") or die(mysqli_error());
 			$fetch = mysqli_fetch_array($query);
 		?>
 		<div class="panel panel-default" style="background-color:#393f4d;" id="panel-margin">
 			<div class="panel-heading" style="background-color:#feda6a;">
-				<center><h1 class="panel-title" style="color:red;">Perfil del Estudiante</h1></center>
+				<center><h1 class="panel-title" style="color:red;">Perfil</h1></center>
 			</div>
 			<div class="panel-body">
-				<h4 style="color:#fff;">Nª de Cuenta: <label class="pull-right"><?php echo $fetch['stud_no']?></label></h4>
+				<h4 style="color:#fff;">Nª de Cuenta: <label class="pull-right"><?php echo $fetch['cod_id']?></label></h4>
 				<h4 style="color:#fff;">Name: <label class="pull-right"><?php echo $fetch['firstname']." ".$fetch['lastname']?></label></h4>
 				<h4 style="color:#fff;">Unidad: <label class="pull-right"><?php echo $fetch['unidad']?></label></h4>
 				<h3 style="color:#fff;">Carga de Archivo</h3>
 				<form method="POST" enctype="multipart/form-data" action="save_file.php">
 					<input type="file" name="file" size="4" style="background-color:#fff;" required="required" />
 					<br />
-					<input type="hidden" name="stud_no" value="<?php echo $fetch['stud_no']?>"/>
+					<input type="hidden" name="cod_id" value="<?php echo $fetch['cod_id']?>"/>
 					<button class="btn btn-success btn-sm" name="save"><span class="glyphicon glyphicon-plus"></span> Agregar Archivo</button>
 				</form>
 				<br style="clear:both;"/>
@@ -44,6 +45,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="col-md-8">
 		<div class="panel panel-default" style="margin-top:100px;">
 			<div class="panel-body">
@@ -58,8 +60,8 @@
 					</thead>
 					<tbody>
 						<?php
-							$stud_no = $fetch['stud_no'];
-							$query = mysqli_query($conn, "SELECT * FROM `storage` WHERE `stud_no` = '$stud_no'") or die(mysqli_error());
+							$cod_id = $fetch['cod_id'];
+							$query = mysqli_query($conn, "SELECT * FROM `storage` WHERE `cod_id` = '$cod_id'") or die(mysqli_error());
 							while($fetch = mysqli_fetch_array($query)){
 						?>
 						<tr class="del_file<?php echo $fetch['store_id']?>">
@@ -111,34 +113,34 @@
 			</div>
 		</div>
 	</div>
-<?php include 'script.php'?>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.btn_remove').on('click', function(){
-		var store_id = $(this).attr('id');
-		$("#modal_remove").modal('show');
-		$('#btn_yes').attr('name', store_id);
-	});
-	
-	$('#btn_yes').on('click', function(){
-		var id = $(this).attr('name');
-		$.ajax({
-			type: "POST",
-			url: "remove_file.php",
-			data:{
-				store_id: id
-			},
-			success: function(data){
-				$("#modal_remove").modal('hide');
-				$(".del_file" + id).empty();
-				$(".del_file" + id).html("<td colspan='4'><center class='text-danger'>Deleting...</center></td>");
-				setTimeout(function(){
-					$(".del_file" + id).fadeOut('slow');
-				}, 1000);
-			}
-		});
-	});
-});
+					<?php include 'script.php'?>
+					<script type="text/javascript">
+					$(document).ready(function(){
+						$('.btn_remove').on('click', function(){
+							var store_id = $(this).attr('id');
+							$("#modal_remove").modal('show');
+							$('#btn_yes').attr('name', store_id);
+						});
+						
+						$('#btn_yes').on('click', function(){
+							var id = $(this).attr('name');
+							$.ajax({
+								type: "POST",
+								url: "remove_file.php",
+								data:{
+									store_id: id
+								},
+								success: function(data){
+									$("#modal_remove").modal('hide');
+									$(".del_file" + id).empty();
+									$(".del_file" + id).html("<td colspan='4'><center class='text-danger'>Deleting...</center></td>");
+									setTimeout(function(){
+										$(".del_file" + id).fadeOut('slow');
+									}, 1000);
+								}
+							});
+						});
+					});
 </script>	
 </body>
 </html>
