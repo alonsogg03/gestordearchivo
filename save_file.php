@@ -19,6 +19,8 @@ if (isset($_POST['save'])) {
         mkdir("files/" . $cod_id, 0777, true); // También establece los permisos a 0777
     }
 
+    //comentario de prueba
+
     // Mover el archivo al directorio de destino
     if (move_uploaded_file($file_temp, $location)) {
         // Insertar en la base de datos
