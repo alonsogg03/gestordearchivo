@@ -48,7 +48,7 @@
 		<table id = "table" class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Cuenta Estudiantil</th>
+					<th>Nª Cuenta</th>
 					<th>Nombre</th>
 					<th>Apellidos</th>
 					<th>Género</th>

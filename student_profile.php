@@ -13,6 +13,7 @@
 		<link rel = "stylesheet" type = "text/css" href = "admin/css/style.css" />
 	</head>
 <body>
+
 	<nav class="navbar navbar-default navbar-fixed-top" style="background-color:blue;">
 		<div class="container-fluid">
 			<label class="navbar-brand" id="title">Sistema Gestor de Archivos Básico</label>
@@ -25,7 +26,7 @@
 		?>
 		<div class="panel panel-default" style="background-color:#393f4d;" id="panel-margin">
 			<div class="panel-heading" style="background-color:#feda6a;">
-				<center><h1 class="panel-title" style="color:red;">Perfil del Estudiante</h1></center>
+				<center><h1 class="panel-title" style="color:red;">Perfil</h1></center>
 			</div>
 			<div class="panel-body">
 				<h4 style="color:#fff;">Nª de Cuenta: <label class="pull-right"><?php echo $fetch['stud_no']?></label></h4>
@@ -44,6 +45,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="col-md-8">
 		<div class="panel panel-default" style="margin-top:100px;">
 			<div class="panel-body">
@@ -111,34 +113,34 @@
 			</div>
 		</div>
 	</div>
-<?php include 'script.php'?>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.btn_remove').on('click', function(){
-		var store_id = $(this).attr('id');
-		$("#modal_remove").modal('show');
-		$('#btn_yes').attr('name', store_id);
-	});
-	
-	$('#btn_yes').on('click', function(){
-		var id = $(this).attr('name');
-		$.ajax({
-			type: "POST",
-			url: "remove_file.php",
-			data:{
-				store_id: id
-			},
-			success: function(data){
-				$("#modal_remove").modal('hide');
-				$(".del_file" + id).empty();
-				$(".del_file" + id).html("<td colspan='4'><center class='text-danger'>Deleting...</center></td>");
-				setTimeout(function(){
-					$(".del_file" + id).fadeOut('slow');
-				}, 1000);
-			}
-		});
-	});
-});
+					<?php include 'script.php'?>
+					<script type="text/javascript">
+					$(document).ready(function(){
+						$('.btn_remove').on('click', function(){
+							var store_id = $(this).attr('id');
+							$("#modal_remove").modal('show');
+							$('#btn_yes').attr('name', store_id);
+						});
+						
+						$('#btn_yes').on('click', function(){
+							var id = $(this).attr('name');
+							$.ajax({
+								type: "POST",
+								url: "remove_file.php",
+								data:{
+									store_id: id
+								},
+								success: function(data){
+									$("#modal_remove").modal('hide');
+									$(".del_file" + id).empty();
+									$(".del_file" + id).html("<td colspan='4'><center class='text-danger'>Deleting...</center></td>");
+									setTimeout(function(){
+										$(".del_file" + id).fadeOut('slow');
+									}, 1000);
+								}
+							});
+						});
+					});
 </script>	
 </body>
 </html>

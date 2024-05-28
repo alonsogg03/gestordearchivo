@@ -10,6 +10,7 @@ if (isset($_POST['save'])) {
     $stud_no = $_POST['stud_no'];
     $file_name = $_FILES['file']['name'];
     $file_type = $_FILES['file']['type'];
+    $file_type = $_FILES['file']['descripcion'];
     $file_temp = $_FILES['file']['tmp_name'];
     $location = "files/" . $stud_no . "/" . $file_name;
     $date = date("Y-m-d H:i:s", strtotime("+8 hours"));
