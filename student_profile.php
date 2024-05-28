@@ -21,7 +21,7 @@
 	</nav>
 	<div class="col-md-4">
 		<?php
-			$query = mysqli_query($conn, "SELECT * FROM `student` WHERE `stud_id` = '$_SESSION[student]'") or die(mysqli_error());
+			$query = mysqli_query($conn, "SELECT * FROM `student` WHERE `Id` = '$_SESSION[student]'") or die(mysqli_error());
 			$fetch = mysqli_fetch_array($query);
 		?>
 		<div class="panel panel-default" style="background-color:#393f4d;" id="panel-margin">
@@ -29,14 +29,14 @@
 				<center><h1 class="panel-title" style="color:red;">Perfil</h1></center>
 			</div>
 			<div class="panel-body">
-				<h4 style="color:#fff;">Nª de Cuenta: <label class="pull-right"><?php echo $fetch['stud_no']?></label></h4>
+				<h4 style="color:#fff;">Nª de Cuenta: <label class="pull-right"><?php echo $fetch['cod_id']?></label></h4>
 				<h4 style="color:#fff;">Name: <label class="pull-right"><?php echo $fetch['firstname']." ".$fetch['lastname']?></label></h4>
 				<h4 style="color:#fff;">Unidad: <label class="pull-right"><?php echo $fetch['unidad']?></label></h4>
 				<h3 style="color:#fff;">Carga de Archivo</h3>
 				<form method="POST" enctype="multipart/form-data" action="save_file.php">
 					<input type="file" name="file" size="4" style="background-color:#fff;" required="required" />
 					<br />
-					<input type="hidden" name="stud_no" value="<?php echo $fetch['stud_no']?>"/>
+					<input type="hidden" name="cod_id" value="<?php echo $fetch['cod_id']?>"/>
 					<button class="btn btn-success btn-sm" name="save"><span class="glyphicon glyphicon-plus"></span> Agregar Archivo</button>
 				</form>
 				<br style="clear:both;"/>
@@ -60,8 +60,8 @@
 					</thead>
 					<tbody>
 						<?php
-							$stud_no = $fetch['stud_no'];
-							$query = mysqli_query($conn, "SELECT * FROM `storage` WHERE `stud_no` = '$stud_no'") or die(mysqli_error());
+							$cod_id = $fetch['cod_id'];
+							$query = mysqli_query($conn, "SELECT * FROM `storage` WHERE `cod_id` = '$cod_id'") or die(mysqli_error());
 							while($fetch = mysqli_fetch_array($query)){
 						?>
 						<tr class="del_file<?php echo $fetch['store_id']?>">
